@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=OmniPlay
+Comment=Unified Music Player for Spotify Premium, YouTube Music, SoundCloud & Local Audio
+Exec=omniplay
+Icon=omniplay
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;Music;Player;
+Keywords=music;spotify;youtube;soundcloud;player;audio;
+StartupWMClass=omniplay

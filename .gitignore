@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Tauri / Rust
+src-tauri/target/
+src-tauri/gen/android/app/build/
+src-tauri/gen/apple/build/
+*.apk
+*.aab
+*.AppImage
+*.deb
+*.rpm
+*.msi
+*.exe
+*.pkg.tar.zst
+
+# Arch packaging artifacts
+packaging/arch/src/
+packaging/arch/pkg/
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,22 @@
+# Maintainer: OmniPlay Contributors
+pkgname=omniplay
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Unified high-performance music player for Spotify Premium, YouTube Music, SoundCloud & Local Audio"
+arch=('x86_64')
+url="https://github.com/omniplay"
+license=('MIT')
+depends=('webkit2gtk-4.1' 'gtk3' 'libayatana-appindicator' 'librsvg' 'gst-plugins-good' 'gst-plugins-bad' 'gst-libav')
+optdepends=(
+  'spotifyd: Native Spotify Connect daemon for Arch Linux'
+  'yt-dlp: Optional audio stream helper'
+)
+source=('omniplay-bin' 'omniplay.desktop' 'omniplay.png')
+sha256sums=('SKIP' 'SKIP' 'SKIP')
+options=('!strip' '!debug')
+
+package() {
+  install -Dm755 "${srcdir}/omniplay-bin" "${pkgdir}/usr/bin/omniplay"
+  install -Dm644 "${srcdir}/omniplay.desktop" "${pkgdir}/usr/share/applications/omniplay.desktop"
+  install -Dm644 "${srcdir}/omniplay.png" "${pkgdir}/usr/share/icons/hicolor/128x128/apps/omniplay.png"
+}
