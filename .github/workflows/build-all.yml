@@ -128,7 +128,7 @@ jobs:
           cp src-tauri/target/release/omniplay /tmp/archpkg/omniplay-bin
           cp src-tauri/icons/128x128.png /tmp/archpkg/omniplay.png
           chown -R builder:builder /tmp/archpkg
-          su - builder -c "cd /tmp/archpkg && makepkg -f --noconfirm"
+          su - builder -c "cd /tmp/archpkg && makepkg -f --nodeps --noconfirm"
           mkdir -p dist-arch
           cp /tmp/archpkg/*.pkg.tar.zst dist-arch/
       - uses: actions/upload-artifact@v4
@@ -144,15 +144,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
-      - uses: android-actions/setup-android@v3
       - name: Install Android NDK & SDK 34
         run: |
-          sdkmanager "platforms;android-34" "build-tools;34.0.0" "ndk;27.0.12077973"
-          echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> $GITHUB_ENV
+          SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | head -n 1)
+          yes | "$SDKMANAGER" --licenses >/dev/null 2>&1 || true
+          "$SDKMANAGER" "platforms;android-34" "build-tools;34.0.0" "ndk;27.0.12077973"
+          echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> "$GITHUB_ENV"
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973" >> "$GITHUB_ENV"
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-linux-android
